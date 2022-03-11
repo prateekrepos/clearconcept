@@ -1,0 +1,6 @@
+.mat-tree {
+    background: white;
+}
+.mat-tree-node, .mat-nested-tree-node {
+    color: black;
+}

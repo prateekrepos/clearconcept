@@ -1,0 +1,53 @@
+<h1>JVM Internal Working</h1>
+<hr>
+<h3>
+  <p>There are 3 major components of JVM architecture,
+  Class Loader, runtime data area, and execution engine.
+  </p>
+  <img src="/assets/img/java/JVM-Architecture.png"/>
+  <p>Class loader is the first main component in JVM architecture, which has 3 phases </p>
+   <ul>
+     <li>loading</li>
+     <li>linking</li>
+     <li>initialization</li>
+   </ul>
+   
+   <p>In the loading phase, There are 3 types of class loaders.</p>
+  
+  <ol>
+    <li>Bootstrap class loader is the one that is responsible for loading the class files from Rt dot jar(rt.jar) also called as runtime jar.</li>
+    <li> Extension class loader is the one that is responsible for loading the additional class files from jre lib ext (jre/lib/ext) folder.
+      <br/>For example, if we are working on programs that interact with queues like IBM mq, we may need mq specific jars to be able to connect to the queue.  Or if we are working on connecting to oracle databases, we need ojdbc dot jar.  in these scenario, we add these third-party jar files to the extension folder.
+    </li>
+    <li> Application class loader is the one that loads the class files from the application specific jar.  This is nothing but the application that you created.  Once your java program is compiled, the JVM creates class files.  The Application class loader loads these class files to the memory area.</li>
+  </ol>
+     
+  
+  <p>Second main component in JVM architecture is the run time data area. JVM needs memory area to store the class files and execute them.  </p>
+  There are 5 types of memory data area.  They are method area, Heap memory, Stack memory, PC Registers, and Native method stacks
+  <ol>
+    <li> Method area-  all the class level data are stored in this memory area.  For example, class level static variables are stored in this memory area.</li>
+    <li>Heap memory – all the objects and instance variables are stored in this memory area.</li>
+    <li>  Stack memory – this contains three sections of memory areas.<br/>
+      Local variable – memory area that stores all the local variables that is used within a method<br/>
+      Operand stack – contains all the operands that are used within a method.<br/>
+      Frame data – this contains any catch block information, in case any exception occurs within method.
+    </li>
+    <li>PC registers – this memory area holds the current executing instructions</li>
+    <li>Native method stacks – memory area which holds the native method information</li>
+  </ol>
+
+  <p>The 3rd main component in JVM architecture is the execution engine.  This is the actual engine that converts the bytecode to machine code and executes the instructions.  This contains Interpreter, JIT compiler, Garbage collector, and Java Native method interface.</p>
+  <ol>
+    <li>Interpreter – Interpreter is the one that reads the class files or bytecode and executes it one by one.  The problem with the interpreter is that, when a method is called multiple times, it interprets those lines of bytecode again and again.</li>
+    <li>
+      JIT compiler – JIT compiler helps in overcoming the problem of the interpreter.  When repeated method calls occur, JIT compiler compiles the bytecode to native code.  This native code will be used directly for repeated method calls.  JIT compiler contains few components to achieve this feature<br/>
+      Intermediate code generator – generates intermediate code<br/>
+      Code optimizer – optimizes the intermediate code for better performance<br/>
+      Target code generator – converts intermediate code to native machine code<br/>
+      Profiler – it is responsible for finding the hotspots, methods which are called repeatedly.
+    </li>
+    <li>Garbage collector – Garbage collector is responsible for destroying the objects that are no longer used.</li>
+    <li>Java native method interface – It is responsible for interacting with native libraries and makes it available for the JVM execution engine.</li>
+  </ol>
+</h3>
